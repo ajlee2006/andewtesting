@@ -1,4 +1,4 @@
-import math, re, requests, discord, asyncio, io, aiohttp, random, emoji
+import math, re, requests, discord, asyncio, io, aiohttp, random, emoji, os
 from discord.ext import commands
 from discord_components import DiscordComponents, Button, ButtonStyle
 from discord_slash import SlashCommand
