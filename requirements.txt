@@ -1,0 +1,5 @@
+requests
+discord
+emoji
+discord-components
+discord-py-slash-command==2.0.4
