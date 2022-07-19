@@ -362,7 +362,7 @@ async def _sgtt(ctx, text, fr='', to=''):
         try:
             await masdfasdf.edit(content=text + "\n" + trertert)
         except:
-            await masdfasdf.edit(text)
+            await masdfasdf.edit(content=text)
             await cha.send(trertert)
 
 
