@@ -357,8 +357,13 @@ async def _sgtt(ctx, text, fr='', to=''):
                 asdfa = [asdfa[-1]]
                 masdfasdf = await cha.send(asdfa[0] + ("\n..." if to != "ta" else ""))
     else:
-        masdfasdf = await ctx.send(text+"\n...")
-        await masdfasdf.edit(content=text + "\n" + translate(text, fr=fr, to=to)[:2000])
+        masdfasdf = await ctx.send(text[:1996]+"\n...")
+        trertert = translate(text, fr=fr, to=to)
+        try:
+            await masdfasdf.edit(content=text + "\n" + trertert)
+        except:
+            await masdfasdf.edit(text)
+            await cha.send(trertert)
 
 
 
