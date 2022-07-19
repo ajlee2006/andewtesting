@@ -349,7 +349,7 @@ async def _sgtt(ctx, text, fr='', to=''):
         masdfasdf = await ctx.send(text+"\n...")
         asdfa = [text]
         for to in "zh ms ta".split():
-            asdfa.append(translate(s, to=to)[:1996])
+            asdfa.append(translate(text, to=to)[:1996])
             try:
                 await masdfasdf.edit(content='\n'.join(asdfa) + ("\n..." if to != "ta" else ""))
             except:
