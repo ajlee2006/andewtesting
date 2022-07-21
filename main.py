@@ -269,7 +269,7 @@ async def _forloop(ctx, expression, stop, start=0, step=1):
                  required=False
                ), create_option(
                  name="page",
-                 description="Page number (optional)",
+                 description="Page number (optional). Enter 0 for indexmap",
                  option_type=4,
                  required=False
                )
@@ -286,6 +286,8 @@ async def _oldmap(ctx, year=-1, page=-1):
             y = year
             if page != -1:
                 p = page
+                if p == 0:
+                    p = "indexmap"
                 url = "https://onemap.gov.sg/hm/{0}/{0}%20({1}).jpg".format(y, p)
                 async with aiohttp.ClientSession() as session:
                     async with session.get(url) as resp:
