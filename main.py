@@ -283,6 +283,7 @@ async def _oldmap(ctx, year=-1, page=-1):
             await ctx.send("No map exists for {}. Available years: ".format(year) + str(years))
             return
         else:
+            await ctx.send("Finding map...")
             y = year
             if page != -1:
                 p = page
@@ -297,6 +298,7 @@ async def _oldmap(ctx, year=-1, page=-1):
                         data = io.BytesIO(await resp.read())
                         await channel.send("{}, page {}".format(y, p), file=discord.File(data,"map.jpg"))
                         print(url)
+                        return
     temp = True
     await ctx.send("Finding map...")
     while temp:
@@ -379,9 +381,10 @@ async def _sgtt(ctx, text, fr='', to=''):
                )
     ])
 async def _badtranslate(ctx, text):
+    ch = ctx.channel
     await ctx.send(text)
     s = text
-    madffffff = await ctx.channel.send(s)
+    madffffff = await ch.send(s)
     for i in range(100):
         for j in "zh ms ta".split():
             s = translate(translate(s, to=j), fr=j)
