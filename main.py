@@ -264,7 +264,7 @@ async def _forloop(ctx, expression, stop, start=0, step=1):
 @slash.slash(name="oldmap", description = "Sends a random page from old Singapore maps archive", guild_ids=guild_ids, options=[
                 create_option(
                  name="year",
-                 description="Year (optional)",
+                 description="Year (optional). Available years: [1954, 1955, 1956, 1957, 1958, 1961, 1963, 1966, 1969, 1972, 1975, 1978, 1981, 1984, 1988, 1991, 1993, 1995, 1998, 2000, 2007, 2008, 2009]",
                  option_type=4,
                  required=False
                ), create_option(
@@ -280,7 +280,7 @@ async def _oldmap(ctx, year=-1, page=-1):
     y = random.choice(years)
     if year != -1:
         if year not in years:
-            await ctx.send("No map exists for that year. Available years: " + str(years))
+            await ctx.send("No map exists for {}. Available years: ".format(year) + str(years))
             return
         else:
             y = year
@@ -308,7 +308,10 @@ async def _oldmap(ctx, year=-1, page=-1):
                     continue
                 temp = False
                 data = io.BytesIO(await resp.read())
-                await channel.send("{}, page {}".format(y, p), file=discord.File(data,"map.jpg"))
+                if p == "indexmap":
+                    await channel.send("{}, indexmap".format(y), file=discord.File(data,"map.jpg"))
+                else:
+                    await channel.send("{}, page {}".format(y, p), file=discord.File(data,"map.jpg"))
                 print(url)
 
 
@@ -329,7 +332,7 @@ def translate(s, fr='', to=''):
 @slash.slash(name="sgtt", description = "Translate using SG Translate Together API", guild_ids=guild_ids, options=[
                 create_option(
                  name="text",
-                 description="Text in English",
+                 description="Original text",
                  option_type=3,
                  required=True
                ), create_option(
@@ -366,6 +369,22 @@ async def _sgtt(ctx, text, fr='', to=''):
         except:
             await masdfasdf.edit(content=text)
             await cha.send(trertert[:2000])
+
+@slash.slash(name="badtranslate", description = "Translate to another language and back many times", guild_ids=guild_ids, options=[
+                create_option(
+                 name="text",
+                 description="Text in English",
+                 option_type=3,
+                 required=True
+               )
+    ])
+async def _badtranslate(ctx, text):
+    s = text
+    madffffff = await ctx.send(s)
+    for i in range(100):
+        for j in "zh ms ta".split():
+            s = translate(translate(s, to=j), fr=j)
+            await madffffff.edit(content=s[:2000])
 
 
 
