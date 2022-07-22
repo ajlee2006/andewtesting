@@ -264,7 +264,7 @@ async def _forloop(ctx, expression, stop, start=0, step=1):
 @slash.slash(name="oldmap", description = "Sends a random page from old Singapore maps archive", guild_ids=guild_ids, options=[
                 create_option(
                  name="year",
-                 description="Year (optional). Available years: [1954, 1955, 1956, 1957, 1958, 1961, 1963, 1966, 1969, 1972, 1975, 1978, 1981, 1984, 1988, 1991, 1993, 1995, 1998, 2000, 2007, 2008, 2009]",
+                 description="Year (optional)",
                  option_type=4,
                  required=False
                ), create_option(
