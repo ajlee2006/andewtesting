@@ -379,7 +379,7 @@ async def _sgtt(ctx, text, fr='', to=''):
                )
     ])
 async def _badtranslate(ctx, text):
-    await ctx.send(s)
+    await ctx.send(text)
     s = text
     madffffff = await ctx.channel.send(s)
     for i in range(100):
