@@ -344,7 +344,7 @@ def translate(s, fr='', to=''):
                  required=False
                ), create_option(
                  name="to",
-                 description="Language code to (en zh ms ta). Defaults to en, or zh if from is specified as en",
+                 description="Language code to (en zh ms ta). Returns all if not specified",
                  option_type=3,
                  required=False
                )
@@ -352,11 +352,15 @@ def translate(s, fr='', to=''):
 async def _sgtt(ctx, text, fr='', to=''):
     cha = ctx.channel
 
-    if fr == '' and to == '':
+    if to == '':
+        if fr == '':
+            fr = 'en'
         masdfasdf = await ctx.send(text+"\n...")
         asdfa = [text]
-        for to in "zh ms ta".split():
-            asdfa.append(translate(text, to=to)[:1996])
+        langcodes = "en zh ms ta".split()
+        langcodes.remove(fr)
+        for to in langcodes:
+            asdfa.append(translate(text, fr=fr, to=to)[:1996])
             try:
                 await masdfasdf.edit(content='\n'.join(asdfa) + ("\n..." if to != "ta" else ""))
             except:
@@ -381,10 +385,8 @@ async def _sgtt(ctx, text, fr='', to=''):
                )
     ])
 async def _badtranslate(ctx, text):
-    ch = ctx.channel
-    await ctx.send(text)
     s = text
-    madffffff = await ch.send(s)
+    madffffff = await ctx.channel.send(s)
     for i in range(100):
         for j in "zh ms ta".split():
             s = translate(translate(s, to=j), fr=j)
