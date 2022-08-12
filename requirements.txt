@@ -3,3 +3,6 @@ discord
 emoji
 discord-components
 discord-py-slash-command==2.0.4
+pyotp
+pillow
+qrcode
