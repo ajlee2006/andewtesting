@@ -1,4 +1,4 @@
-import math, re, requests, discord, asyncio, io, aiohttp, random, emoji, os
+import math, re, requests, discord, asyncio, io, aiohttp, random, emoji, os, pyotp, qrcode
 from discord.ext import commands
 from discord_components import DiscordComponents, Button, ButtonStyle
 from discord_slash import SlashCommand
@@ -392,6 +392,13 @@ async def _badtranslate(ctx, text):
             s = translate(translate(s, to=j), fr=j)
             await madffffff.edit(content=s[:2000])
 
+@slash.slash(name="generate2fa", description="Sends you a QR code for 2FA demo", guild_ids=guild_ids, options=[])
+async def _generate2fa(ctx):
+    img = qrcode.make('otpauth://totp/AndewTesting 2FA demo ({0.user})?secret={0.id}'.format(ctx.author))
+    output = io.BytesIO()
+    img.save(output, format='PNG')
+    output.seek(0)
+    await ctx.author.send(file=discord.File(fp=output, filename='qr{0.id}.png'.format(ctx.author)))
 
 
 # @bot.command(brief="Deliberately bad calculation")
